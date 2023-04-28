@@ -6,9 +6,18 @@ const getImage = async ({ value, page }) => {
   const response = await axios.get(
     `${BASE_URL}?q=${value}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
   );
-  const data = response.data;
+  const { hits, totalHits } = response.data;
 
-  return data;
+  const images = hits.map(({ id, webformatURL, largeImageURL }) => ({
+    id,
+    webformatURL,
+    largeImageURL,
+  }));
+
+  return {
+    images,
+    totalHits,
+  };
 };
 
 export default getImage;

@@ -15,7 +15,7 @@ const initialValues = {
 
 const SearchBar = ({ onSearch }) => {
   const handleSubmit = (values, { resetForm }) => {
-    if (!values.value) {
+    if (!values.value.trim()) {
       toast.error('Please enter a search query');
     } else {
       onSearch(values.value);
